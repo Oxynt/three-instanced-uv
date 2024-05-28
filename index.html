@@ -46,7 +46,8 @@
 	dirLight.position.set( 0,600,-900);
 	dirLight.castShadow = false;
 	scene.add( dirLight );
-	
+
+	window.addEventListener( 'resize', onWindowResize, false );
 	
 	//objects
 	//----------------------------------------------------------------------------- 
@@ -57,7 +58,7 @@
 	texture.magFilter = THREE.LinearFilter;
 	texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 	texture.offset.set( 0, 0 );
-    texture.repeat.set( 1 , 1 );
+	texture.repeat.set( 1 , 1 );
 	
 	//UV
 	const count = 20; //number of instance
@@ -71,11 +72,11 @@
 	console.log(uvOffset)
 
 	
-var material = new THREE.MeshPhongMaterial({
-	map: texture,
-	shininess:0,
-	transparent:true
-});
+	var material = new THREE.MeshPhongMaterial({
+		map: texture,
+		shininess:0,
+		transparent:true
+	});
 	
 	//shader injection
 	material.onBeforeCompile = function ( shader ) {
@@ -104,7 +105,6 @@ var material = new THREE.MeshPhongMaterial({
 
 	//plane instances
 	const tileSize = 5;
-	const gap = 10;
 	const planeGeometry = new THREE.PlaneGeometry(tileSize,tileSize, 1,1);
 	planeGeometry.rotateX(-Math.PI * 0.5);
 	
